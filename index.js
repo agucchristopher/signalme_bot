@@ -1,10 +1,12 @@
 const { Client, GatewayIntentBits } = require("discord.js");
+const { config } = require("dotenv");
 const moment = require("moment");
 const axios = require("axios");
 const currentDate = new Date();
 const formattedDate = moment(currentDate).format(
   "dddd, MMMM Do YYYY, h:mm:ss a"
 );
+config();
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
