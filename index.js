@@ -53,6 +53,11 @@ client.on("messageCreate", async (msg) => {
       break;
   }
 });
+client.on("guildMemberAdd", async (msg) => {
+  console.log(msg);
+
+  msg.reply(`Started bot @${msg.author.username}`);
+});
 
 async function fetchForexData() {
   try {
