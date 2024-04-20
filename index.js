@@ -108,19 +108,19 @@ function generateForexSignals(data) {
 const cron = require("node-cron");
 
 let app = express();
+cron.schedule("*/5 * * * *", async () => {
+  await fetch("https://signalme-bot.onrender.com");
+  const forexData = await fetchForexData();
+  const signal = generateForexSignals(forexData);
 
+  const channel = client.channels.cache.get("1231312858780794993");
+  if (channel) {
+    channel.send(`Forex Signal: ${signal}`);
+  } else {
+    console.error("Channel not found.");
+  }
+});
 app.get("/", (req, res) => {
-  cron.schedule("*/5 * * * *", async () => {
-    const forexData = await fetchForexData();
-    const signal = generateForexSignals(forexData);
-
-    const channel = client.channels.cache.get("1231312858780794993");
-    if (channel) {
-      channel.send(`Forex Signal: ${signal}`);
-    } else {
-      console.error("Channel not found.");
-    }
-  });
   res.send({ status: true });
 });
 
