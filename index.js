@@ -2,6 +2,7 @@ const { Client, GatewayIntentBits } = require("discord.js");
 const { config } = require("dotenv");
 const moment = require("moment");
 const axios = require("axios");
+const express = require("express");
 const currentDate = new Date();
 const formattedDate = moment(currentDate).format(
   "dddd, MMMM Do YYYY, h:mm:ss a"
@@ -105,14 +106,24 @@ function generateForexSignals(data) {
 }
 
 const cron = require("node-cron");
-cron.schedule("*/5 * * * *", async () => {
-  const forexData = await fetchForexData();
-  const signal = generateForexSignals(forexData);
 
-  const channel = client.channels.cache.get("1231312858780794993");
-  if (channel) {
-    channel.send(`Forex Signal: ${signal}`);
-  } else {
-    console.error("Channel not found.");
-  }
+let app = express();
+
+app.get("/", (req, res) => {
+  cron.schedule("*/5 * * * *", async () => {
+    const forexData = await fetchForexData();
+    const signal = generateForexSignals(forexData);
+
+    const channel = client.channels.cache.get("1231312858780794993");
+    if (channel) {
+      channel.send(`Forex Signal: ${signal}`);
+    } else {
+      console.error("Channel not found.");
+    }
+  });
+  res.send({ status: true });
+});
+
+app.listen(8080, () => {
+  console.log("Bot running...");
 });
