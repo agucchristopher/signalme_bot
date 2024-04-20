@@ -7,6 +7,8 @@ const formattedDate = moment(currentDate).format(
   "dddd, MMMM Do YYYY, h:mm:ss a"
 );
 config();
+const discordToken = process.env.DiscordToken;
+console.log(discordToken);
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -32,7 +34,7 @@ client.on("ready", async () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.login(process.env.DiscordToken);
+client.login(discordToken);
 
 client.on("messageCreate", async (msg) => {
   console.log(msg);
