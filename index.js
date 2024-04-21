@@ -124,7 +124,7 @@ cron.schedule("*/5 * * * *", async () => {
   }
 });
 app.get("/", (req, res) => {
-  res.send({ status: true });
+  res.end({ status: true });
 });
 
 app.listen(8080, () => {
