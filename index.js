@@ -52,7 +52,7 @@ client.on("messageCreate", async (msg) => {
     case "clear":
       msg.delete();
       const fetched = await msg.channel.awaitMessages({ limit: 99 });
-      console.log(fetched);
+      // console.log(fetched);
       msg.channel.bulkDelete(100);
       break;
 
@@ -62,7 +62,7 @@ client.on("messageCreate", async (msg) => {
   }
 });
 client.on("guildMemberAdd", async (msg) => {
-  console.log(msg);
+  // console.log(msg);
 
   msg.reply(`Started bot @${msg.author.username}`);
 });
@@ -81,7 +81,7 @@ async function fetchForexData() {
     return response.data;
   } catch (error) {
     console.error("Error fetching forex data:", error);
-    console.log(error.message);
+    console.log(error);
     return null;
   }
 }
