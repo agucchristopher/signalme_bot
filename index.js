@@ -42,11 +42,11 @@ client.on("messageCreate", async (msg) => {
   if (msg.content.trim().toLocaleLowerCase() === "test") {
     msg.reply(`Server is working @${msg.author.username}`);
   }
-  if (msg.content.trim().toLocaleLowerCase() === "hello" || "hey" || "hi") {
-    msg.reply(`Hello @${msg.author.username}`);
-  }
+  // if (msg.content.trim().toLocaleLowerCase() === "hello" || "hey" || "hi") {
+  //   msg.reply(`Hello @${msg.author.username}`);
+  // }
   switch (msg.content) {
-    case "start":
+    case "hello":
       msg.reply(`Started bot @${msg.author.username}`);
       break;
     case "clear":
@@ -61,12 +61,6 @@ client.on("messageCreate", async (msg) => {
       break;
   }
 });
-client.on("guildMemberAdd", async (msg) => {
-  // console.log(msg);
-
-  msg.reply(`Started bot @${msg.author.username}`);
-});
-
 async function fetchForexData() {
   try {
     const response = await axios.get(`https://www.alphavantage.co/query`, {
