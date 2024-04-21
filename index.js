@@ -38,9 +38,12 @@ client.on("ready", async () => {
 client.login(discordToken);
 
 client.on("messageCreate", async (msg) => {
-  console.log(msg);
-  if (msg.content === "test") {
-    msg.reply(`Hello ${msg.author.username}`);
+  // console.log(msg);
+  if (msg.content.trim().toLocaleLowerCase() === "test") {
+    msg.reply(`Server is working @${msg.author.username}`);
+  }
+  if (msg.content.trim().toLocaleLowerCase() === "hello" || "hey" || "hi") {
+    msg.reply(`Hello @${msg.author.username}`);
   }
   switch (msg.content) {
     case "start":
